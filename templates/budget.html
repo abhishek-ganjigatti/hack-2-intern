@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget - My Budget App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Your Budget Page</h1>
+        <p>This is where you manage your budget.</p>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        
+        <!-- Add Transaction Form -->
+        <div class="form-container">
+            <h2>Add Income/Expense</h2>
+            <form action="{{ url_for('budget') }}" method="POST">
+                <label for="transaction_type">Transaction Type (e.g., Salary, Rent, etc.):</label>
+                <input type="text" name="transaction_type" id="transaction_type" required placeholder="Enter transaction type">
+                
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" id="amount" step="0.01" required placeholder="Enter amount">
+                
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="date" required>
+                
+                <button type="submit">Add Transaction</button>
+            </form>
+        </div>
+        
+        <!-- Transaction List -->
+        <h2>Transactions</h2>
+        {% if transactions %}
+            <table class="transaction-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td>{{ transaction.type }}</td>
+                            <td>{{ transaction.amount }}</td>
+                            <td>{{ transaction.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No transactions added yet.</p>
+        {% endif %}
+        
+        <!-- Pie Chart -->
+        <h2>Budget Breakdown</h2>
+        <div class="pie-chart-container">
+            {% if pie_chart %}
+                <img src="data:image/png;base64,{{ pie_chart }}" alt="Budget Pie Chart">
+            {% else %}
+                <p>No data to display the pie chart.</p>
+            {% endif %}
+        </div>
+
+        <p><a href="{{ url_for('home') }}">Back to Home</a></p>
+    </div>
+</body>
+</html>

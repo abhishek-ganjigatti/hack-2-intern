@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome to your Budget Dashboard</h2>
+    <a href="/add_budget">Add Budget</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Transaction Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for budget in budgets %}
+            <tr>
+                <td>{{ budget.category }}</td>
+                <td>{{ budget.amount }}</td>
+                <td>{{ budget.transaction_type }}</td>
+                <td><a href="/delete_budget/{{ budget.id }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/logout">Logout</a>
+</body>
+</html>

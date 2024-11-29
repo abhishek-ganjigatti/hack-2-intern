@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Pie Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .pie-chart-container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Your Budget Summary</h1>
+    <p>Income vs Expense</p>
+    <div class="pie-chart-container">
+        <img src="data:image/png;base64,{{ pie_chart }}" alt="Budget Pie Chart">
+    </div>
+
+</body>
+</html>

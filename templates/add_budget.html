@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Budget</title>
+</head>
+<body>
+    <h2>Add Budget</h2>
+    <form action="/add_budget" method="POST">
+        <input type="text" name="category" placeholder="Category" required>
+        <input type="number" name="amount" placeholder="Amount" step="0.01" required>
+        <select name="transaction_type" required>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+        <button type="submit">Add Budget</button>
+    </form>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>
